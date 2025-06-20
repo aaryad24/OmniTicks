@@ -1,10 +1,12 @@
 import { Inngest } from "inngest";
+import User from "../models/User.js";
 
-export const inngesr = new Inngest{( id: "movie-ticket-booking" )};
+
+export const inngest = new Inngest({ id: "movie-ticket-booking" });
 
 //innegest funtion to save user data to a Database
-const syncUserCreation = inngest.createFuntion(
-    {id: 'sync-user-from-cleark'},
+const syncUserCreation = inngest.createFunction(
+    {id: 'sync-user-from-clerk'},
     { event: 'clerk/user.created' },
     async({ event })=>{
         const{id, first_name, last_name, email_addresses, image_url} = event.data
@@ -14,24 +16,24 @@ const syncUserCreation = inngest.createFuntion(
             name:first_name + ' ' + last_name,
             image: image_url
         }
-        await User.create(userData),
+        await User.create(userData);
     }
 )
 
 
-const syncUserDeletion = inngest.createFuntion(
-    {id: 'delete-user-from-cleark'},
+const syncUserDeletion = inngest.createFunction(
+    {id: 'delete-user-from-clerk'},
     { event: 'clerk/user.deleted' },
     async({ event })=>{
         const{id} = event.data
         
-        await User.findByIdAndDelete(id),
+        await User.findByIdAndDelete(id);
     }
 )
 
 
-const syncUserUpdation = inngest.createFuntion(
-    {id: 'update-user-from-cleark'},
+const syncUserUpdation = inngest.createFunction(
+    {id: 'update-user-from-clerk'},
     { event: 'clerk/user.updated' },
     async({ event })=>{
 
@@ -42,11 +44,11 @@ const syncUserUpdation = inngest.createFuntion(
             name: first_name + ' ' + last_name,
             image:image_url
         }
-        await User.findByIdAndupdate(id, userData),
+        await User.findByIdAndupdate(id, userData);
     }
 )
 
 
 
 
-export const funtions = [syncUserCreation, syncUserDeletion, syncUserUpdation];
+export const functions = [syncUserCreation, syncUserDeletion, syncUserUpdation];
