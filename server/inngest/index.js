@@ -6,21 +6,28 @@ export const inngest = new Inngest({ id: "movie-ticket-booking" });
 
 //innegest funtion to save user data to a Database
 const syncUserCreation = inngest.createFunction(
-    {id: 'sync-user-from-clerk',
-        timeout:30,
-    },
-    { event: 'clerk/user.created' },
-    async({ event })=>{
-        const{id, first_name, last_name, email_addresses, image_url} = event.data
-        const userData = {
-            _id: id,
-            email: email_addresses[0].email_address,
-            name:first_name + ' ' + last_name,
-            image: image_url
-        }
-        await User.create(userData);
+  {
+    id: 'sync-user-from-clerk',
+    timeout: 30,
+    retries: 3, // 👈 Add automatic retries
+  },
+  { event: 'clerk/user.created' },
+  async ({ event }) => {
+    try {
+      const { id, first_name, last_name, email_addresses, image_url } = event.data;
+      const userData = {
+        _id: id,
+        email: email_addresses[0]?.email_address, // 👈 Optional chaining
+        name: `${first_name || ''} ${last_name || ''}`.trim(), // 👈 Safer concatenation
+        image: image_url,
+      };
+      await User.create(userData);
+    } catch (err) {
+      console.error("Failed to sync user:", err);
+      throw err; // 👈 Let Inngest retry
     }
-)
+  }
+);
 
 
 const syncUserDeletion = inngest.createFunction(
@@ -46,7 +53,7 @@ const syncUserUpdation = inngest.createFunction(
             name: first_name + ' ' + last_name,
             image:image_url
         }
-        await User.findByIdAndupdate(id, userData);
+        await User.findByIdAndUpdate(id, userData);
     }
 )
 
