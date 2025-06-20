@@ -11,12 +11,12 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 flex px-10 justify-between items-center ">
-      <Link to="/" className="max-md:flex-1">
+    <div className="fixed top-4 left-0 w-full z-50 flex px-10 justify-between items-center ">
+      <Link to="/" className="flex items-center h-full">
         <img
           src="qwe.png"
           alt="logo"
-          className=" h-[65px] max-md:w-24 max-md:h-24 md:w-32 md:h-32 object-cover"
+          className="h-[75px] w-auto object-contain"
         />
       </Link>
 
