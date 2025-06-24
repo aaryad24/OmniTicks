@@ -8,7 +8,6 @@ import isoTimeFormat from "../lib/isoTimeFormat";
 import BlurCircle from "../components/BlurCircle";
 import toast from "react-hot-toast";
 import { useAppContext } from "../context/AppContext";
-import Inngest from "inngest"
 
 
 const SeatLayout = () => {
