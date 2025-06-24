@@ -1,10 +1,13 @@
 import React from 'react'
-import { dummyShowsData } from '../assets/assets'
 import BlurCircle from '../components/BlurCircle'
 import MovieCard from '../components/MovieCard'
+import { useAppContext } from '../context/AppContext'
+import Loading from '../components/Loading'
 
 const Favorite = () => {
-  return dummyShowsData.length > 0 ? (
+    const { favoriteMovies } = useAppContext()
+  
+  return favoriteMovies.length > 0 ? (
     <div className="relative xl:px-44 overflow-hidden my-40 mb-60 px-6 md:px-16 lg:px-40 min-h-[80vh] ">
       <BlurCircle top="150px" left="0px"></BlurCircle>
       <BlurCircle bottom="50px" right="50px"></BlurCircle>
@@ -12,13 +15,13 @@ const Favorite = () => {
     Your Favorite Movies
       </h1>
       <div className="flex flex-wrap max-sm:justify-center gap-8">
-        {dummyShowsData.map((movie) => (
+        {favoriteMovies.map((movie) => (
           <MovieCard movie={movie} key={movie.id} />
         ))}
       </div>
     </div>
   ) : (
-    <div>No movies available.</div>
+    <Loading/>
   )
 }
 

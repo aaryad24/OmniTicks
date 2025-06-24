@@ -2,7 +2,7 @@ import React from 'react'
 
 const AdminNavbar = () => {
   return (
-    <div className='text-white'>AdminNavbar</div>
+    <div className='text-white'></div>
   )
 }
 
