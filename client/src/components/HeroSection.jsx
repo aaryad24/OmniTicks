@@ -2,36 +2,43 @@ import React from 'react'
 import { CalendarIcon, ClockIcon, ArrowRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
-
+// HeroSection.jsx - Redesigned with side content
 const HeroSection = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
   return (
-      <div className='flex flex-col items-start justify-center gap-4 px-6 md:px-16 lg:px-36 bg-[url("/backgroundImage.png")] bg-cover bg-center h-screen'>
-        <img src="marvelLogo.svg" alt="" className="max-h-11 lg:h-11 mt-20"/>
-        <h1 className='text-5xl md:leading-18 font-semibold max-w-110'> Guardians <br />
-          of the Galaxy
-        </h1>
-        <div className='flex items-center gap-4 text-gray-300'>
-          <span> Action | Adventure | Sci-Fi</span>
-          <div className='flex items-center gap-1' >
-            <CalendarIcon className='w-4.5 h-4.5'/>
-            2018
-          </div>
-          <div className='flex items-center gap-1' >
-            <ClockIcon className='w-4.5 h-4.5'/> 2h 8m
-          </div>
-        </div>
-        <p className='max-w-md text-gray-300 a post-apocalyptic world where
-cities ride on wheels and consume each other to
-survive, two people meet in
-London and try to stop a conspiracy'></p>
-<button onClick={()=> navigate('/Movies')} className='flex items-center gap-1 px-6
-py-3 text-sm bg-primary
-hover:bg-primary-dull transition rounded-full font-medium cursor-pointer' >
-Explore Movies
-<ArrowRight className="w-5 h-5"/>
-</button>
+    <div className="relative w-full  h-screen">
+      {/* Background with parallax effect */}
+      <div className="absolute inset-0 bg-[url('/squidMINI.jpg')] bg-cover bg-center"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
+
+      {/* Floating movie posters */}
+      <div className="absolute -bottom-20 right-20 w-40 h-60 transform rotate-12 shadow-2xl z-10">
+        <img src="/dead.jpg" className="w-full h-full object-cover rounded-lg" />
       </div>
+      <div className="absolute -bottom-10 right-80 w-32 h-48 transform -rotate-6 shadow-xl z-20">
+        <img src="/moneyheist.jpg" className="w-full h-full object-fill rounded-lg" />
+      </div>
+
+      {/* Main content */}
+      <div className="relative z-30 h-full flex flex-col justify-end p-12">
+        <h1 className="text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+          Immersive Cinema Experience
+        </h1>
+        <div className="flex gap-4 mb-8">
+          <button 
+            onClick={() => navigate('/movies')}
+            className="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-lg font-bold flex items-center gap-2 transition-all"
+          >
+            Explore Movies
+            <ArrowRight className="w-5 h-5" />
+          </button>
+          <button className="px-8 py-3 border border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 font-bold rounded-lg transition-all">
+            Membership
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
 

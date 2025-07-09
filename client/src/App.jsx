@@ -17,14 +17,21 @@ import ListBookings from "./pages/admin/ListBookings.jsx"
 import { useAppContext } from "./context/AppContext.jsx";
 import { SignIn } from "@clerk/clerk-react";
 import Loading from "./components/Loading.jsx";
+import IntroVideo from "./components/IntroVideo.jsx";
+import UpcomingMovies from "./pages/UpcomingMovies.jsx";
+import TheatersPage from "./pages/Theaters.jsx";
 
 const App = () => {
+  const location = useLocation();
   const isAdminRoute = useLocation().pathname.startsWith("/admin")
+  const isHomePage = location.pathname === "/";
 
   const { user } = useAppContext()
 
   return (
     <>
+    <IntroVideo>
+
       <Toaster />
       {!isAdminRoute && <Navbar />}
       <Routes>
@@ -34,6 +41,8 @@ const App = () => {
         <Route path="/movies/:id/:date" element={<SeatLayout />} />
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/loading/:nextUrl" element={<Loading />} />
+        <Route path="/theaters" element={<TheatersPage />} />
+        <Route path="/releases" element={<UpcomingMovies />} />
         <Route path="/favorite" element={<Favorite />} />
         <Route path="/admin/*" element={user ? <Layout/> : (
           <div className="'min-h-screen flex justify-center items-center">
@@ -46,7 +55,8 @@ const App = () => {
           <Route path="list-bookings" element={<ListBookings />} />
         </Route>
       </Routes>
-      {!isAdminRoute && <Footer />}
+      {!isAdminRoute && isHomePage && <Footer />}
+    </IntroVideo>
     </>
   );
 };

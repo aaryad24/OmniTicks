@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MenuIcon, XIcon, SearchIcon, TicketPlus } from "lucide-react";
-import { useState } from "react";
 import { useClerk, useUser, UserButton } from "@clerk/clerk-react";
 import { useAppContext } from "../context/AppContext";
 
@@ -10,217 +9,135 @@ const Navbar = () => {
   const { user } = useUser();
   const { openSignIn } = useClerk();
   const navigate = useNavigate();
-
-      const { favoriteMovies } = useAppContext()
-  
+  const { favoriteMovies } = useAppContext();
 
   return (
-    <div className="fixed top-4 left-0 w-full z-50 flex px-10 justify-between items-center ">
-      <Link to="/" className="flex items-center h-full">
-        <img
-          src="qwe.png"
-          alt="logo"
-          className="h-[75px] w-auto object-contain"
-        />
+    <div className="fixed top-0 left-0 w-full z-50 flex px-6 md:px-10 py-2 justify-between items-center bg-gray-900/90 backdrop-blur-lg border-b border-cyan-500/20">
+      {/* Logo with Neon Glow */}
+      <Link 
+        to="/" 
+        className="flex items-center h-full group"
+        onClick={() => window.scrollTo(0, 0)}
+      >
+        <div className="relative">
+          <div className="absolute -inset-1 bg-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-40 transition-all duration-300"></div>
+          <img
+            src="qwe.png"
+            alt="logo"
+            className="relative h-[65px] w-auto object-contain z-10"
+          />
+        </div>
       </Link>
 
-      <div
-        className={`max-md:absolute max-md:top-0 max-md:left-0 max-md:font-medium
-max-md:text-lg z-50 flex flex-col md:flex-row items-center
-max-md:justify-center gap-8 min-md:px-8 py-3 max-md:h-screen
-min-md:rounded-full backdrop-blur bg-black/70 md:bg-white/10 md:border
-border-gray-300/20 overflow-hidden transition-[width] duration-300
-${isOpen ? "max-md:w-full" : "max-md:w-0"}`}
-      >
-        <XIcon
-          className="md:hidden absolute top-6 right-6 w-6 h-6 cursor-pointer"
-          onClick={() => setIsOpen(!isOpen)}
-        />
-        <Link
-          onClick={() => {
-            scrollTo(0, 0); setIsOpen(false);
-          }}
-          to="/"
-        >
-          Home
-        </Link>
-        <Link
-          onClick={() => {
-            scrollTo(0, 0); setIsOpen(false);
-          }}
-          to="/movies"
-        >
-          Movies
-        </Link>
-        <Link
-          onClick={() => {
-            scrollTo(0, 0); setIsOpen(false);
-          }}
-          to="/"
-        >
-          Theaters
-        </Link>
-        <Link
-          onClick={() => {
-            scrollTo(0, 0); setIsOpen(false);
-          }}
-          to="/"
-        >
-          Releases
-        </Link>
-        {favoriteMovies.length>0 && <Link
-          onClick={() => {
-            scrollTo(0, 0); setIsOpen(false);
-          }}
-          to="/favorite"
-        >
-          Favorites
-        </Link>}
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex items-center gap-1 bg-gray-800/50 backdrop-blur-md rounded-full px-4 py-1 border border-cyan-500/20">
+        <NavLink to="/" setIsOpen={setIsOpen}>Home</NavLink>
+        <NavLink to="/movies" setIsOpen={setIsOpen}>Movies</NavLink>
+        <NavLink to="/theaters" setIsOpen={setIsOpen}>Theaters</NavLink>
+        <NavLink to="/releases" setIsOpen={setIsOpen}>Releases</NavLink>
+        {favoriteMovies.length > 0 && (
+          <NavLink to="/favorite" setIsOpen={setIsOpen}>Favorites</NavLink>
+        )}
       </div>
 
-      <div className="flex items-center gap-8">
-        <SearchIcon className="max-md:hidden w-6 h-6 cursor-pointer" />
+      {/* User Actions */}
+      <div className="flex items-center gap-6">
+        {/* Search Icon */}
+        <button className="p-2 rounded-full hover:bg-gray-800/50 transition-all">
+          <SearchIcon className="w-5 h-5 text-cyan-400" />
+        </button>
 
         {!user ? (
           <button
             onClick={openSignIn}
-            className="px-4 py-l sm:px-7 sm:py-2
-bg-primary hover:bg-primary-dull transition rounded-full
-font-medium cursor-pointer"
+            className="relative overflow-hidden px-5 py-2 rounded-full font-medium cursor-pointer group"
           >
-            Login
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 opacity-100 group-hover:opacity-90 transition-all"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-all"></div>
+            <div className="absolute inset-[2px] bg-gray-900 rounded-full"></div>
+            <span className="relative z-10 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent group-hover:text-white transition-all">
+              Login
+            </span>
           </button>
         ) : (
-          <UserButton>
-            <UserButton.MenuItems>
-              <UserButton.Action
-                label="Bookings"
-                labelIcon={<TicketPlus width={15} />}
-                onClick={() => navigate("/my-bookings")}
-              />
-            </UserButton.MenuItems>
-          </UserButton>
+          <UserButton >
+              <div className="absolute -inset-1 bg-cyan-500 rounded-full blur opacity-0 group-hover:opacity-30 transition-all duration-300"></div>
+              <UserButton.MenuItems className="bg-gray-800 border border-cyan-500/20 rounded-lg overflow-hidden">
+                <UserButton.Action
+                  label="Bookings"
+                  labelIcon={<TicketPlus width={15} className="text-cyan-400" />}
+                  onClick={() => navigate("/my-bookings")}
+                  className="hover:bg-gray-700/50 transition-colors"
+                />
+              </UserButton.MenuItems>
+            </UserButton>
+        )}
+
+        {/* Mobile Menu Button */}
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2 rounded-full hover:bg-gray-800/50"
+        >
+          {isOpen ? (
+            <XIcon className="w-6 h-6 text-cyan-400" />
+          ) : (
+            <MenuIcon className="w-6 h-6 text-cyan-400" />
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div 
+        className={`fixed inset-0 bg-gray-900/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 transition-all duration-300 md:hidden ${
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <XIcon
+          className="absolute top-6 right-6 w-8 h-8 text-cyan-400 cursor-pointer"
+          onClick={() => setIsOpen(false)}
+        />
+        <MobileNavLink to="/" setIsOpen={setIsOpen}>Home</MobileNavLink>
+        <MobileNavLink to="/movies" setIsOpen={setIsOpen}>Movies</MobileNavLink>
+        <MobileNavLink to="/theaters" setIsOpen={setIsOpen}>Theaters</MobileNavLink>
+        <MobileNavLink to="/releases" setIsOpen={setIsOpen}>Releases</MobileNavLink>
+        {favoriteMovies.length > 0 && (
+          <MobileNavLink to="/favorite" setIsOpen={setIsOpen}>Favorites</MobileNavLink>
         )}
       </div>
-      <MenuIcon
-        className="max-md:m-4 md:hidden w-8 h-8 cursor-pointer"
-        onClick={() => setIsOpen(!isOpen)}
-      />
     </div>
   );
 };
 
+// Reusable NavLink Component
+const NavLink = ({ to, children, setIsOpen }) => (
+  <Link
+    to={to}
+    onClick={() => {
+      window.scrollTo(0, 0);
+      setIsOpen(false);
+    }}
+    className="relative px-4 py-2 group"
+  >
+    <span className="relative z-10 text-gray-300 group-hover:text-white transition-colors">
+      {children}
+    </span>
+    <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-cyan-400 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+  </Link>
+);
+
+// Mobile NavLink Variant
+const MobileNavLink = ({ to, children, setIsOpen }) => (
+  <Link
+    to={to}
+    onClick={() => {
+      window.scrollTo(0, 0);
+      setIsOpen(false);
+    }}
+    className="text-2xl font-medium text-gray-300 hover:text-cyan-400 transition-colors px-6 py-2 relative"
+  >
+    {children}
+    <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-cyan-400 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+  </Link>
+);
+
 export default Navbar;
-
-// import React from "react";
-// import { Link, useNavigate } from "react-router-dom";
-// import { MenuIcon, XIcon, SearchIcon, TicketPlus } from "lucide-react";
-// import { useState } from "react";
-// import { useClerk, useUser, UserButton } from "@clerk/clerk-react";
-
-// const Navbar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const { user } = useUser();
-//   const { openSignIn } = useClerk();
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className="fixed top-0 left-0 w-full z-50 flex px-10 justify-between items-center h-24">
-//       {/* Logo section with fixed height and perfect alignment */}
-//       <Link to="/" className="flex items-center h-full">
-//         <img
-//           src="qwe.png"
-//           alt="logo"
-//           className="h-[75px] w-auto object-contain"
-//         />
-//       </Link>
-
-//       {/* Middle navigation - unchanged but perfectly aligned */}
-//       <div
-//         className={`max-md:absolute max-md:top-0 max-md:left-0 max-md:font-medium
-//           max-md:text-lg z-50 flex flex-col md:flex-row items-center
-//           max-md:justify-center gap-8 min-md:px-8 py-3 max-md:h-screen
-//           min-md:rounded-full backdrop-blur bg-black/70 md:bg-white/10 md:border
-//           border-gray-300/20 overflow-hidden transition-[width] duration-300
-//           ${isOpen ? "max-md:w-full" : "max-md:w-0"}`}
-//       >
-//         <XIcon
-//           className="md:hidden absolute top-6 right-6 w-6 h-6 cursor-pointer"
-//           onClick={() => setIsOpen(!isOpen)}
-//         />
-//         <Link
-//           onClick={() => {
-//             scrollTo(0, 0); setIsOpen(false);
-//           }}
-//           to="/"
-//         >
-//           Home
-//         </Link>
-//         <Link
-//           onClick={() => {
-//             scrollTo(0, 0); setIsOpen(false);
-//           }}
-//           to="/movies"
-//         >
-//           Movies
-//         </Link>
-//         <Link
-//           onClick={() => {
-//             scrollTo(0, 0); setIsOpen(false);
-//           }}
-//           to="/"
-//         >
-//           Theaters
-//         </Link>
-//         <Link
-//           onClick={() => {
-//             scrollTo(0, 0); setIsOpen(false);
-//           }}
-//           to="/"
-//         >
-//           Releases
-//         </Link>
-//         <Link
-//           onClick={() => {
-//             scrollTo(0, 0); setIsOpen(false);
-//           }}
-//           to="/favorites"
-//         >
-//           Favorites
-//         </Link>
-//       </div>
-
-//       {/* Right section - unchanged but perfectly aligned */}
-//       <div className="flex items-center gap-8">
-//         <SearchIcon className="max-md:hidden w-6 h-6 cursor-pointer" />
-
-//         {!user ? (
-//           <button
-//             onClick={openSignIn}
-//             className="px-4 py-l sm:px-7 sm:py-2
-//             bg-primary hover:bg-primary-dull transition rounded-full
-//             font-medium cursor-pointer"
-//           >
-//             Login
-//           </button>
-//         ) : (
-//           <UserButton>
-//             <UserButton.MenuItems>
-//               <UserButton.Action
-//                 label="Bookings"
-//                 labelIcon={<TicketPlus width={15} />}
-//                 onClick={() => navigate("/my-bookings")}
-//               />
-//             </UserButton.MenuItems>
-//           </UserButton>
-//         )}
-//       </div>
-//       <MenuIcon
-//         className="max-md:m-4 md:hidden w-8 h-8 cursor-pointer"
-//         onClick={() => setIsOpen(!isOpen)}
-//       />
-//     </div>
-//   );
-// };
-
-// export default Navbar;

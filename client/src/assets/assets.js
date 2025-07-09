@@ -177,7 +177,7 @@ export const dummyShowsData = [
     {
         "_id": "986056",
         "id": 986056,
-        "title": "Thunderbolts*",
+        "title": "Thunderbolts",
         "overview": "After finding themselves ensnared in a death trap, seven disillusioned castoffs must embark on a dangerous mission that will force them to confront the darkest corners of their pasts.",
         "poster_path": "https://image.tmdb.org/t/p/original/m9EtP1Yrzv6v7dMaC9mRaGhd1um.jpg",
         "backdrop_path": "https://image.tmdb.org/t/p/original/rthMuZfFv4fqEU4JVbgSW9wQ8rs.jpg",

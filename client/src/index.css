@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+@import "tailwindcss";
 
 
 @theme{
@@ -29,4 +29,102 @@ input::-webkit-inner-spin-button {
 
 input::-webkit-calendar-picker-indicator {
   filter: invert(1);
+}
+
+/* ===== RED GAMING THEME ===== */
+/* Add this to your CSS file or component */
+
+/* Base Red Gaming Theme */
+.red-gaming-theme {
+  background: linear-gradient(135deg, #1a0000, #0a0005);
+  color: #ffe0e0;
+  font-family: 'Orbitron', 'Segoe UI', sans-serif; /* Orbitron for gaming vibe */
+}
+
+/* Blood-Red Neon Text */
+.red-neon-title {
+  text-shadow: 0 0 10px #ff0033, 
+               0 0 20px #ff0022,
+               0 0 30px #ff0011;
+  letter-spacing: 1px;
+}
+
+.red-neon-text {
+  text-shadow: 0 0 5px rgba(255, 50, 50, 0.7);
+}
+
+/* Danger-zone Buttons */
+.red-gaming-btn {
+  border: 2px solid #ff0033;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(255, 0, 50, 0.5);
+}
+
+.red-gaming-btn:hover {
+  background: rgba(255, 0, 50, 0.2);
+  box-shadow: 0 0 20px #ff0033;
+  transform: translateY(-2px);
+}
+
+.red-gaming-btn:active {
+  transform: translateY(1px);
+}
+
+.red-gaming-btn-primary {
+  background: linear-gradient(45deg, #ff0033, #ff6600);
+  color: #fff !important;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+.red-gaming-btn-primary:hover {
+  background: linear-gradient(45deg, #ff0055, #ff8800);
+}
+
+/* Cast Cards (Hover Glow) */
+.red-gaming-cast-card {
+  transition: transform 0.3s;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.red-gaming-cast-card:hover {
+  transform: scale(1.1);
+  border-color: #ff0033;
+  box-shadow: 0 0 15px rgba(255, 0, 50, 0.7);
+}
+
+/* Section Headers (Pulsing Underline) */
+.red-gaming-section-header {
+  position: relative;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ff0033;
+  width: fit-content;
+}
+
+.red-gaming-section-header::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 30%;
+  height: 3px;
+  background: #ff6600;
+  box-shadow: 0 0 10px #ff6600;
+}
+
+:root {
+  --navy-900: #0f172a;
+  --navy-950: #020617;
+  --gold-400: #d4a017;
+  --gold-500: #b78c10;
+  --gold-600: #9a760d;
+}
+
+body.video-intro {
+  overflow: hidden;
+  height: 100vh;
 }
