@@ -9,7 +9,7 @@ const Movies = () => {
   const navigate = useNavigate();
 
   return shows.length > 0 ? (
-    <section className="relative py-25 px-6 md:px-12 lg:px-24 bg-gray-900 min-h-[100vh]">
+    <section className="relative py-40 px-6 md:px-12 lg:px-24 bg-gray-900 min-h-[100vh]">
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
       
@@ -17,13 +17,12 @@ const Movies = () => {
       <AnimatedBackground />
         {/* Header with timeline dot */}
         <div className="relative pl-12 pb-16">
-          <div className="absolute left-0 w-4 h-4 rounded-full bg-cyan-500 transform translate-x-[-50%]"></div>
+          <div className="absolute left-0 top-3 w-4 h-4 rounded-full bg-cyan-500 transform translate-x-[-50%]"></div>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
             <div>
-              <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 mb-2">
+              <h1 className="text-4xl  font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 mb-2">
                 Now Showing
               </h1>
-              <p className="text-gray-300">Browse our current movie selection</p>
             </div>
             <button
               onClick={() => navigate("/theaters")}
@@ -38,7 +37,7 @@ const Movies = () => {
         {/* Movies Timeline */}
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-4 h-full w-0.5 bg-gradient-to-b from-purple-500 to-cyan-500"></div>
+          <div className="absolute left- h-full w-0.5 bg-gradient-to-b from-purple-500 to-cyan-500"></div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pl-12">
             {shows.map((movie, index) => (

@@ -12,7 +12,7 @@ const Favorite = () => {
     <div className="relative xl:px-44 overflow-hidden my-40 mb-60 px-6 md:px-16 lg:px-40 min-h-[80vh] ">
       <AnimatedBackground />
       
-      <h1 className="text-lg  font-medium my-4">
+      <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 mb-2 py-2">
     Your Favorite Movies
       </h1>
       <div className="flex flex-wrap max-sm:justify-center gap-8">

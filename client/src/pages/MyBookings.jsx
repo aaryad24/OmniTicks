@@ -37,7 +37,7 @@ const MyBookings = () => {
     }, [user]);
 
     return !isLoading ? (
-        <div className='relative px-4 py-8 sm:px-6 md:px-8 lg:px-12 min-h-[80vh]'>
+        <div className='relative px-4 py-30 sm:px-6 md:px-8 lg:px-12 min-h-[80vh]'>
             <AnimatedBackground/>
             
             <div className='max-w-6xl mx-auto'>

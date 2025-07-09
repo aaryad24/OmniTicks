@@ -145,7 +145,7 @@ const SeatLayout = () => {
     if (!show) return <Loading />;
 
     return (
-        <div className="relative px-6 md:px-12 lg:px-24 py-12 bg-gray-900 min-h-screen">
+        <div className="relative px-6 md:px-12 lg:px-24 py-30 bg-gray-900 min-h-screen">
             {/* Background elements */}
             
 
