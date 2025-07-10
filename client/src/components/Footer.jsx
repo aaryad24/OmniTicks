@@ -52,9 +52,9 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 z-10 relative">
                 {/* Logo and Description */}
             <div className="group">
-              <div className="relative inline-block mb-6">
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-all duration-300"></div>
-                <img className="w-50 h-auto z-10 relative" src="qwe.png" alt="logo" />
+              <div className="relative inline-block">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-700 to-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-all duration-300"></div>
+                <img className="w-50 h-auto z-10 relative" src="footerlogo.png" alt="logo" />
               </div>
               <p className="text-gray-300 text-sm leading-relaxed mb-6">
                 OmniTicks.By using our site, you agree to our Terms of Service, Privacy Policy, and Cookie Policy. Movie titles, logos, and related content are property of their respective owners. Prices and showtimes are subject to change without notice."
@@ -68,11 +68,11 @@ const Footer = () => {
                     href="#" 
                     className="group relative transition-all"
                   >
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-all"></div>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-700 to-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-all"></div>
                     <img
                       src={app}
                       alt={index === 0 ? "google play" : "app store"}
-                      className="h-10 w-auto border border-gray-700 rounded-lg hover:border-cyan-400 transition-all relative z-10"
+                      className="h-10 w-auto border border-gray-700 rounded-lg hover:border-blue-400 transition-all relative z-10"
                     />
                   </a>
                 ))}
@@ -138,23 +138,7 @@ const Footer = () => {
         ))}
       </div>
 
-      {/* Attribution in footer (hidden by default, shown on hover/focus) */}
-      <div className="mt-2 text-xs text-gray-500 opacity-0 hover:opacity-100 focus-within:opacity-100 transition-opacity">
-        Icons by:
-        {socialLinks.map((social, index) => (
-          <span key={index} className="ml-2">
-            <a 
-              href={social.attribution} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-cyan-400"
-            >
-              {social.name}
-            </a>
-            {index < socialLinks.length - 1 ? ',' : ''}
-          </span>
-        ))}
-      </div>
+      
     </div>
               </div>
             </div>

@@ -12,15 +12,15 @@ const Navbar = () => {
   const { favoriteMovies } = useAppContext();
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 flex px-6 md:px-10 py-2 justify-between items-center bg-gray-900/90 backdrop-blur-lg border-b border-cyan-500/20">
+    <div className="fixed top-0 left-0 w-full z-50 flex    justify-between items-center bg-[#01122D] backdrop-blur-lg border-b border-cyan-500/20">
       {/* Logo with Neon Glow */}
       <Link 
         to="/" 
-        className="flex items-center h-full group"
+        className="flex items-start h-full group bg-amber-800"
         onClick={() => window.scrollTo(0, 0)}
       >
         <div className="relative">
-          <div className="absolute -inset-1 bg-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-40 transition-all duration-300"></div>
+          <div className="absolute -inset-1 bg-cyan-500 rounded-lg blur opacity-0   transition-all duration-300"></div>
           <img
             src="qwe.png"
             alt="logo"
@@ -41,7 +41,7 @@ const Navbar = () => {
       </div>
 
       {/* User Actions */}
-      <div className="flex items-center gap-6">
+      <div className="flex left-7 px-6 gap-6">
         {/* Search Icon */}
         <button className="p-2 rounded-full hover:bg-gray-800/50 transition-all">
           <SearchIcon className="w-5 h-5 text-cyan-400" />
