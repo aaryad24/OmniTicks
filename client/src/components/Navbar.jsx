@@ -11,20 +11,26 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { favoriteMovies } = useAppContext();
 
+  const logoUrl = "/qwe.png";
+
   return (
-    <div className="fixed top-0 left-0 w-full z-50 flex    justify-between items-center bg-[#01122D] backdrop-blur-lg border-b border-cyan-500/20">
-      {/* Logo with Neon Glow */}
+    <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center bg-[#01122D] backdrop-blur-lg border-b border-cyan-500/20 px-4 sm:px-6 lg:px-8">
+      {/* Logo */}
       <Link 
         to="/" 
-        className="flex items-start h-full group bg-amber-800"
+        className="flex items-center h-full group"
         onClick={() => window.scrollTo(0, 0)}
       >
         <div className="relative">
-          <div className="absolute -inset-1 bg-cyan-500 rounded-lg blur opacity-0   transition-all duration-300"></div>
+          <div className="absolute -inset-1 bg-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-all duration-300"></div>
           <img
-            src="qwe.png"
-            alt="logo"
-            className="relative h-[65px] w-auto object-contain z-10"
+            src={logoUrl}
+            alt="OmniTicks Logo"
+            className="relative h-12 sm:h-14 md:h-[65px] w-auto object-contain z-10"
+            onError={(e) => {
+              e.target.onerror = null; 
+              e.target.src = "/qwe.png";
+            }}
           />
         </div>
       </Link>
@@ -72,23 +78,11 @@ const Navbar = () => {
               </UserButton.MenuItems>
             </UserButton>
         )}
-
-        {/* Mobile Menu Button */}
-        <button 
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 rounded-full hover:bg-gray-800/50"
-        >
-          {isOpen ? (
-            <XIcon className="w-6 h-6 text-cyan-400" />
-          ) : (
-            <MenuIcon className="w-6 h-6 text-cyan-400" />
-          )}
-        </button>
-      </div>
+        </div>
 
       {/* Mobile Menu */}
       <div 
-        className={`fixed inset-0 bg-gray-900/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 bg-gray-900/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-6 transition-all duration-300 md:hidden ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -104,11 +98,10 @@ const Navbar = () => {
           <MobileNavLink to="/favorite" setIsOpen={setIsOpen}>Favorites</MobileNavLink>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 
-// Reusable NavLink Component
 const NavLink = ({ to, children, setIsOpen }) => (
   <Link
     to={to}
@@ -116,16 +109,15 @@ const NavLink = ({ to, children, setIsOpen }) => (
       window.scrollTo(0, 0);
       setIsOpen(false);
     }}
-    className="relative px-4 py-2 group"
+    className="relative px-3 py-1 sm:px-4 sm:py-2 group"
   >
-    <span className="relative z-10 text-gray-300 group-hover:text-white transition-colors">
+    <span className="relative z-10 text-gray-300 group-hover:text-white transition-colors text-sm sm:text-base">
       {children}
     </span>
     <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-cyan-400 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
   </Link>
 );
 
-// Mobile NavLink Variant
 const MobileNavLink = ({ to, children, setIsOpen }) => (
   <Link
     to={to}
@@ -133,7 +125,7 @@ const MobileNavLink = ({ to, children, setIsOpen }) => (
       window.scrollTo(0, 0);
       setIsOpen(false);
     }}
-    className="text-2xl font-medium text-gray-300 hover:text-cyan-400 transition-colors px-6 py-2 relative"
+    className="text-xl sm:text-2xl font-medium text-gray-300 hover:text-cyan-400 transition-colors px-6 py-2 relative"
   >
     {children}
     <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-cyan-400 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
