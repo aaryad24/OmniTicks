@@ -22,7 +22,7 @@ const Navbar = () => {
         onClick={() => window.scrollTo(0, 0)}
       >
         <div className="relative">
-          <div className="absolute -inset-1 bg-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-all duration-300"></div>
+          <div className="absolute -inset-1 bg-cyan-500 rounded-lg blur opacity-0  transition-all duration-300"></div>
           <img
             src={logoUrl}
             alt="OmniTicks Logo"
