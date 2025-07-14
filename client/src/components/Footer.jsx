@@ -36,9 +36,9 @@ const Footer = () => {
       ></div>
       
       {/* Timeline line */}
-      <div className="absolute top-0 left-4 sm:left-6 md:left-12 lg:left-24 w-0.5 h-full bg-gradient-to-b from-purple-500 to-cyan-500"></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
+      <div className="absolute sm:left-6 md:left-12 lg:left-3 w-0.5 h-[80%] bg-gradient-to-b from-purple-500 to-cyan-500"></div>
         {/* Main footer content */}
         <div className="relative pl-8 sm:pl-12 md:pl-16 lg:pl-20 pb-12 md:pb-16">
           {/* Timeline dot */}
